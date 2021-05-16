@@ -16,4 +16,8 @@ public class UserService {
     public void createUser(User user) {
         usersRepository.insert(user);
     }
+
+    public User getUserByUserName(String username){
+        return usersRepository.getUserByUsername(username);
+    }
 }

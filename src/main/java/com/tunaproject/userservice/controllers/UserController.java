@@ -22,21 +22,4 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<Void> createUser(@RequestBody SignUpRequest request){
-        User user = new User();
-        String userId = UUID.randomUUID().toString();
-        user.setId(userId);
-        user.setName(request.getName());
-        user.setSurname(request.getSurname());
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
-        userService.createUser(user);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(user.getId())
-                .toUri();
-        return ResponseEntity.created(location).build();
-    }
 }

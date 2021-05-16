@@ -21,14 +21,15 @@ public class UsersRepository {
         pitsCollection.insert(user.getId(), user);
     }
 
-    public List<User> getUsersByName(String name){
-        String statement = String.format("Select id,name,surname,email from users where name = '%s'", name);
+    public User getUserByUsername(String username){
+        String statement = String.format("Select id,username,name,surname,email from users where name = '%s'", username);
         QueryResult query = couchbaseCluster.query(statement);
-        return query.rowsAs(User.class);
+        return query.rowsAs(User.class).get(0);
     }
 
     public void deleteUserById(String id){
         String statement = String.format("Delete from users where users.id = \"%s\"",id);
         QueryResult query = couchbaseCluster.query(statement);
     }
+
 }
